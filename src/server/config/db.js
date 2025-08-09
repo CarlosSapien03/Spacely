@@ -7,6 +7,14 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     });
     console.log("MongoDB connected successfully");
+    console.log(
+      "Ruta del .env:",
+      require("path").resolve(process.cwd(), ".env")
+    );
+    console.log(
+      "Contenido de .env:",
+      require("fs").readFileSync(".env", "utf8")
+    );
   } catch (error) {
     console.error("MongoDB connection failed:", error.message);
     process.exit(1);
