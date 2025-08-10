@@ -33,7 +33,7 @@ async function connectDB() {
 }
 
 async function insertSampleSpaces() {
-  const Space = require("./space.model");
+  const Space = require("../models/space.model");
   if (!Space || !Space.modelName) {
     throw new Error("❌ Modelo Space no se cargó correctamente");
   }

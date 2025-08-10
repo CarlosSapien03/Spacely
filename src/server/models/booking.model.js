@@ -31,11 +31,19 @@ const bookingSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["confirmed", "cancelled"],
-      default: "confirmed",
+      enum: ["pending", "confirmed", "cancelled", "completed"],
+      default: "pending",
     },
   },
   { timestamps: true }
 );
+
+// Validación de horarios
+bookingSchema.pre("save", function (next) {
+  if (this.endTime <= this.startTime) {
+    throw new Error("La reserva debe terminar después de iniciar");
+  }
+  next();
+});
 
 module.exports = mongoose.model("Booking", bookingSchema);
